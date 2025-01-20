@@ -1,13 +1,47 @@
 [tool.poetry]
-name = "python-experiments-bootstrap"
-version = "0.1.0"
-description = ""
+name = "ProFed"
+version = "0.0.1"
+description = "A benchmark for proximity-based non-IID Federated Learning"
 authors = ["Davide Domini <davide.domini@unibo.it>"]
 readme = "README.md"
+license = "MIT"
+homepage = "https://github.com/davidedomini/ProFed"
+repository = "https://github.com/davidedomini/ProFed"
+include = [
+    "LICENSE",
+]
+classifiers = [
+    "Topic :: System :: Benchmark",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+packages = [
+    { include = "ProFed", from = "src" },
+]
+
+[tool.poetry.urls]
+"Changelog" = "https://github.com/davidedomini/ProFed/blob/main/CHANGELOG.md"
+
+[tool.poetry.group.dev.dependencies]
+python-semantic-release = "^9.16.1"
+
+[tool.semantic_release]
+version_variable = [
+    "src/ProFed/__init__.py:__version__"
+]
+version_toml = [
+    "pyproject.toml:tool.poetry.version"
+]
+branch = "main"
+upload_to_pypi = true
+upload_to_release = true
+build_command = "pip install poetry && poetry build"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-
+torch = "^2.5.1"
+numpy = "^2.2.2"
+torchvision = "^0.20.1"
 
 [build-system]
 requires = ["poetry-core"]
