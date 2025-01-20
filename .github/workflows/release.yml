@@ -1,0 +1,40 @@
+name: Semantic Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    concurrency: release
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Install poetry
+        shell: bash
+        run: pipx install poetry
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          cache: poetry
+
+      - name: Install dependencies
+        run: poetry install --with=dev
+
+      - name: Python Semantic Release
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "action@github.com"
+
+          poetry run semantic-release publish -D commit_author="github-actions <action@github.com>"
+        env:
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
+          PYPI_TOKEN: ${{secrets.PYPI_TOKEN}}
