@@ -36,6 +36,10 @@ branch = "main"
 upload_to_pypi = true
 upload_to_release = true
 build_command = "pip install poetry && poetry build"
+version_source = "tag"
+commit_version_number = true
+commit_message = "chore(release): v{version} [skip ci]"
+
 
 [tool.poetry.dependencies]
 python = "^3.12"
