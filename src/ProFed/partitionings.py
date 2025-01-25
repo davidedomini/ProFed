@@ -1,3 +1,6 @@
+import math
+import torch
+import random
 import numpy as np
 from torch.utils.data import Subset, Dataset
 from torchvision import datasets, transforms
@@ -56,10 +59,44 @@ class Partitioner:
         """
         pass
 
-    def __partition_hard(self):
-        pass
+    def __partition_hard(self, data, areas) -> dict[int, list[int]]:
+        labels = len(data.dataset.classes)
+        labels_set = np.arange(labels)
+        split_classes_per_area = np.array_split(labels_set, areas)
+        distribution = np.zeros((areas, labels))
+        for i, elems in enumerate(split_classes_per_area):
+            rows = [i for _ in elems]
+            distribution[rows, elems] = 1 / len(elems)
+        return self.__partition_by_distribution(distribution, data, areas)
 
-    def _partition_iid(self):
+    def __partition_iid(self, data, areas) -> dict[int, list[int]]:
+        labels = len(data.dataset.classes)
+        percentage = 1 / labels
+        distribution = np.zeros((areas, labels))
+        distribution.fill(percentage)
+        return self.__partition_by_distribution(distribution, data, areas)
+
+    def __partition_by_distribution(self, distribution: np.ndarray, data: Subset, areas: int) -> dict[int, list[int]]:
+        indices = data.indices
+        targets = data.dataset.targets
+        class_counts = torch.bincount(targets[indices])
+        class_to_indices = {}
+        for index in indices:
+            c = targets[index].item()
+            if c in class_to_indices:
+                class_to_indices[c].append(index)
+            else:
+                class_to_indices[c] = [index]
+        max_examples_per_area = int(math.floor(len(indices) / areas))
+        elements_per_class = torch.floor(torch.tensor(distribution) * max_examples_per_area).to(torch.int)
+        partitions = {a: [] for a in range(areas)}
+        for area in range(areas):
+            elements_per_class_in_area = elements_per_class[area, :].tolist()
+            for c in sorted(class_to_indices.keys()):
+                elements = min(elements_per_class_in_area[c], class_counts[c].item())
+                selected_indices = random.sample(class_to_indices[c], elements)
+                partitions[area].extend(selected_indices)
+        return partitions
         pass
 
     def __partition_dirichlet(self, data, areas):
