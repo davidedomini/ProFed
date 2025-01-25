@@ -31,7 +31,6 @@ jobs:
 
       - name: Python Semantic Release
         run: |
-          poetry build
           poetry run semantic-release publish 
         env:
           GH_TOKEN: ${{secrets.GH_TOKEN}}
