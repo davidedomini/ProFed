@@ -1,1 +1,1 @@
-# python-experiments-bootstrap
+# ProFed: A Benchmark for Proximity-based Federated Learning
