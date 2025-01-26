@@ -2,8 +2,8 @@ import math
 import torch
 import random
 import numpy as np
-from torch.utils.data import Subset, Dataset
 from torchvision import datasets, transforms
+from torch.utils.data import Subset, Dataset, random_split
 
 class Partitioner:
 
@@ -51,13 +51,18 @@ class Partitioner:
             raise Exception(f'Dataset {dataset_name} not supported! Please check :)')
         return dataset
 
-    def train_validation_split(self, train_percentage: float) -> tuple[Subset, Subset]:
+    def train_validation_split(self, dataset: Dataset, train_percentage: float) -> tuple[Subset, Subset]:
         """
         Split a given dataset in training and validation set.
+        :param dataset: The dataset to be split in training and validation subsets.
         :param train_percentage: The percentage of training instances, it must be a value between 0 and 1.
         :return: A tuple containing the training and validation subsets.
         """
-        pass
+        dataset_size = len(dataset)
+        training_size = int(dataset_size * 0.8)
+        validation_size = dataset_size - training_size
+        training_data, validation_data = random_split(dataset, [training_size, validation_size])
+        return training_data, validation_data
 
     def __partition_hard(self, data, areas) -> dict[int, list[int]]:
         labels = len(data.dataset.classes)
