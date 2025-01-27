@@ -19,6 +19,10 @@ class Partitioner:
         """
         if partitioning_method == 'Dirichlet':
             partitions = self.__partition_dirichlet(dataset, areas)
+        elif partitioning_method == 'Hard':
+            partitions = self.__partition_hard(dataset, areas)
+        if partitioning_method == 'IID':
+            partitions = self.__partition_iid(dataset, areas)
         else:
             raise Exception(f'Partitioning method {partitioning_method} not supported! Please check :)')
 
