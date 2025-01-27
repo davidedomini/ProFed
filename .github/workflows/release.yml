@@ -7,31 +7,47 @@ on:
 
 jobs:
   release:
+    name: Release
+    concurrency:
+      # Only one release job at a time. Strictly sequential.
+      group: deploy
     runs-on: ubuntu-latest
-    concurrency: release
-
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Code
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-          token: ${{ secrets.GH_TOKEN }}
+          fetch-depth: 0 # all history
 
-      - name: Install poetry
+      - name: Get All Tags
+        run: git fetch --tags -f
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Poetry
+        run: pip install -r requirements.txt
+
+      - name: Restore Development Environment
+        run: poetry install
+
+      - name: Get Node Version
+        id: get-node-version
+        run: echo version=$(jq -r .engines.node package.json) >> $GITHUB_OUTPUT
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ steps.get-node-version.outputs.version }}
+
+      - name: Release
         shell: bash
-        run: pipx install poetry
-
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.12"
-          cache: poetry
-
-      - name: Install dependencies
-        run: poetry install --with=dev
-
-      - name: Python Semantic Release
         run: |
-          poetry run semantic-release publish 
+          npm install
+          npx semantic-release --branches `git branch --show-current`
         env:
-          GH_TOKEN: ${{secrets.GH_TOKEN}}
-          PYPI_TOKEN: ${{secrets.PYPI_TOKEN}}
+          PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          RELEASE_TEST_PYPI: ${{ contains(github.repository, 'template') }}
+          RELEASE_DRY_RUN: ${{ github.ref_name != 'master' && github.ref_name != 'main' }}

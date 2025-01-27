@@ -22,25 +22,6 @@ packages = [
 [tool.poetry.urls]
 "Changelog" = "https://github.com/davidedomini/ProFed/blob/main/CHANGELOG.md"
 
-[tool.poetry.group.dev.dependencies]
-python-semantic-release = "^9.16.1"
-
-[tool.semantic_release]
-version_variable = [
-    "src/ProFed/__init__.py:__version__"
-]
-version_toml = [
-    "pyproject.toml:tool.poetry.version"
-]
-branch = "main"
-upload_to_pypi = true
-upload_to_release = true
-build_command = "pip install poetry && poetry build"
-version_source = "tag"
-commit_version_number = true
-commit_message = "chore(release): v{version} [skip ci]"
-
-
 [tool.poetry.dependencies]
 python = "^3.12"
 torch = "^2.5.1"
