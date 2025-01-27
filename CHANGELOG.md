@@ -1,3 +1,9 @@
+## [0.2.0](https://github.com/davidedomini/ProFed/compare/0.1.0...0.2.0) (2025-01-27)
+
+### Features
+
+* define empty API fot data distribution among client devices ([15fb161](https://github.com/davidedomini/ProFed/commit/15fb1618f34ec9085b0672f65f8bc31be5052f5a))
+
 ## [0.1.0](https://github.com/davidedomini/ProFed/compare/v0.0.1...0.1.0) (2025-01-27)
 
 ### Features
