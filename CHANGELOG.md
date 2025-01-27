@@ -1,3 +1,9 @@
+## [0.3.0](https://github.com/davidedomini/ProFed/compare/0.2.0...0.3.0) (2025-01-27)
+
+### Features
+
+* add call to hard and iid partitionings ([c5fdfa0](https://github.com/davidedomini/ProFed/commit/c5fdfa0d37fb93f2c77678608d51a327a95a7f00))
+
 ## [0.2.0](https://github.com/davidedomini/ProFed/compare/0.1.0...0.2.0) (2025-01-27)
 
 ### Features
