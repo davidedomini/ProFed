@@ -23,6 +23,9 @@ class Partitioner:
             raise Exception(f'Partitioning method {partitioning_method} not supported! Please check :)')
 
         return partitions
+    
+    def subregions_distributions_to_devices_distributions(partitioning: dict[int, list[int]]) -> dict[int, list[int]]:
+        pass
 
     def download_dataset(self, dataset_name: str, train: bool = True, transform: transforms.Compose = None, download_path: str = 'dataset') -> Dataset:
         """
