@@ -28,8 +28,22 @@ class Partitioner:
 
         return partitions
     
-    def subregions_distributions_to_devices_distributions(partitioning: dict[int, list[int]]) -> dict[int, list[int]]:
-        pass
+    def subregions_distributions_to_devices_distributions(self, partitioning: dict[int, list[int]], devices_for_subregion: list[int], dataset: Subset) -> dict[int,Subset]:
+        """
+        :param partitioning: The mapping between subregions and instances.
+        :param devices_for_subregion: The number of devices for each subregion.
+        :param dataset: A torch Subset containing the dataset to be partitioned.
+        :return: a dict in which keys are the IDs of the devices and the values are the respective Subsets.
+        """
+        next_device_id = 0
+        device_to_subset = {}
+        for id, indexes in partitioning.items():
+            n_devices = devices_for_subregion[id]
+            split = np.array_split(indexes, n_devices)
+            for i in range(n_devices):
+                device_to_subset[next_device_id] = Subset(dataset.dataset, split[i])
+                next_device_id += 1
+        return device_to_subset
 
     def download_dataset(self, dataset_name: str, train: bool = True, transform: transforms.Compose = None, download_path: str = 'dataset') -> Dataset:
         """
