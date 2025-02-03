@@ -1,3 +1,9 @@
+## [0.4.1](https://github.com/davidedomini/ProFed/compare/0.4.0...0.4.1) (2025-02-03)
+
+### Bug Fixes
+
+* fix partitioning method ([952b8c5](https://github.com/davidedomini/ProFed/commit/952b8c5d630e45ab1017e791fc0b24c78c01f7fb))
+
 ## [0.4.0](https://github.com/davidedomini/ProFed/compare/0.3.0...0.4.0) (2025-02-03)
 
 ### Features
