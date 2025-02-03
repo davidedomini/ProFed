@@ -1,3 +1,9 @@
+## [0.4.0](https://github.com/davidedomini/ProFed/compare/0.3.0...0.4.0) (2025-02-03)
+
+### Features
+
+* implement method to distribute data among clients ([1c69181](https://github.com/davidedomini/ProFed/commit/1c69181b7eb55034e19c354f60d2a35e8412f777))
+
 ## [0.3.0](https://github.com/davidedomini/ProFed/compare/0.2.0...0.3.0) (2025-01-27)
 
 ### Features
