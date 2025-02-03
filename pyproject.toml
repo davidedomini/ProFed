@@ -2,11 +2,11 @@
 name = "ProFed"
 version = "0.4.1"
 description = "A benchmark for proximity-based non-IID Federated Learning"
-authors = ["Davide Domini <davide.domini@unibo.it>"]
+authors = [""]
 readme = "README.md"
 license = "MIT"
-homepage = "https://github.com/davidedomini/ProFed"
-repository = "https://github.com/davidedomini/ProFed"
+homepage = ""
+repository = ""
 include = [
     "LICENSE",
 ]
@@ -20,7 +20,7 @@ packages = [
 ]
 
 [tool.poetry.urls]
-"Changelog" = "https://github.com/davidedomini/ProFed/blob/main/CHANGELOG.md"
+"Changelog" = ""
 
 [tool.poetry.dependencies]
 python = "^3.12"
