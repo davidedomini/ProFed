@@ -1,3 +1,9 @@
+## [0.5.0](https://github.com/davidedomini/ProFed/compare/0.4.2...0.5.0) (2025-05-21)
+
+### Features
+
+* implement new devices to data mapping ([76b2807](https://github.com/davidedomini/ProFed/commit/76b2807864462a2de8662191aa32051b650a36d5))
+
 ## [0.4.2](https://github.com/davidedomini/ProFed/compare/0.4.1...0.4.2) (2025-05-21)
 
 ### Bug Fixes
