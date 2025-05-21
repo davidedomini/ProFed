@@ -1,3 +1,9 @@
+## [0.4.2](https://github.com/davidedomini/ProFed/compare/0.4.1...0.4.2) (2025-05-21)
+
+### Bug Fixes
+
+* update torch and torchvision dependecies ([beadd61](https://github.com/davidedomini/ProFed/commit/beadd6153c3e69bd7d50fea0fe1720c1cd6c171e))
+
 ## [0.4.1](https://github.com/davidedomini/ProFed/compare/0.4.0...0.4.1) (2025-02-03)
 
 ### Bug Fixes
