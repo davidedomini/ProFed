@@ -1,3 +1,13 @@
+## [0.6.0](https://github.com/davidedomini/ProFed/compare/0.5.0...0.6.0) (2025-06-09)
+
+### Features
+
+* new API, added concepts of Environment and Region ([90fab5d](https://github.com/davidedomini/ProFed/commit/90fab5dc13609e68422b0e3652609396182f96a5))
+
+### General maintenance
+
+* add python version file ([5ee7b22](https://github.com/davidedomini/ProFed/commit/5ee7b223b2109e3550150fc96d4ff4e77f32a809))
+
 ## [0.5.0](https://github.com/davidedomini/ProFed/compare/0.4.2...0.5.0) (2025-05-21)
 
 ### Features
