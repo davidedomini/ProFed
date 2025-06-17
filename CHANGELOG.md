@@ -1,3 +1,9 @@
+## [0.6.4](https://github.com/davidedomini/ProFed/compare/0.6.3...0.6.4) (2025-06-17)
+
+### Bug Fixes
+
+* add indexes shuffling before splitting ([bde0833](https://github.com/davidedomini/ProFed/commit/bde083389a0880b176331d2a43608bce14530e99))
+
 ## [0.6.3](https://github.com/davidedomini/ProFed/compare/0.6.2...0.6.3) (2025-06-17)
 
 ### Dependency updates
