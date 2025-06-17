@@ -111,7 +111,7 @@ def partition_to_subregions(training_dataset, validation_dataset, partitioning_m
     for k in training_partitions.keys():
         partitions[k] = (Subset(training_dataset.dataset, training_partitions[k]), Subset(validation_dataset.dataset, validation_partitions[k]))
 
-    return Environment(partitions)
+    return Environment(partitions, seed)
 
 
 def __partition_hard(data, areas) -> dict[int, list[int]]:
