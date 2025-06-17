@@ -19,6 +19,8 @@ class Region:
         device_to_subset = dict()
         training_dataset, training_indices = self.training_data.dataset, self.training_data.indices
         validation_dataset, validation_indices = self.validation_data.dataset, self.validation_data.indices
+        np.random.shuffle(training_indices)
+        np.random.shuffle(validation_indices)
         training_split = np.array_split(training_indices, number_of_devices)
         validation_split = np.array_split(validation_indices, number_of_devices)
         for index, (training, validation) in enumerate(zip(training_split, validation_split)):
@@ -28,7 +30,8 @@ class Region:
 
 class Environment:
 
-    def __init__(self, partitions: dict[int, tuple[Subset, Subset]]):
+    def __init__(self, partitions: dict[int, tuple[Subset, Subset]], seed: int):
+        np.random.seed(seed)
         self.regions = [Region(id, training_data, validation_data) for id, (training_data, validation_data) in partitions.items()]
 
 
@@ -82,7 +85,7 @@ def split_train_validation(dataset: Dataset, train_validation_ratio: float) -> t
     return training_data, validation_data
 
 
-def partition_to_subregions(training_dataset, validation_dataset, partitioning_method: str, number_of_regions: int) -> Environment:
+def partition_to_subregions(training_dataset, validation_dataset, partitioning_method: str, number_of_regions: int, seed: int) -> Environment:
     """
     Splits a torch Subset following a given method.
     Implemented methods for label skewness are: IID, Hard, Dirichlet
@@ -153,8 +156,9 @@ def __partition_by_distribution(distribution: np.ndarray, data: Subset, areas: i
     return partitions
 
 
-def __partition_dirichlet(data, areas):
+def __partition_dirichlet(data, areas, seed):
     # Implemented as in: https://proceedings.mlr.press/v97/yurochkin19a.html
+    np.random.seed(seed)
     min_size = 0
     indices = data.indices
     targets = data.dataset.targets
