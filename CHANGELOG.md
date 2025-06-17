@@ -1,3 +1,9 @@
+## [0.6.5](https://github.com/davidedomini/ProFed/compare/0.6.4...0.6.5) (2025-06-17)
+
+### Bug Fixes
+
+* add seed when creating the environment ([b275736](https://github.com/davidedomini/ProFed/commit/b2757367e27c9c21a45b00f0e90a312f870cd7af))
+
 ## [0.6.4](https://github.com/davidedomini/ProFed/compare/0.6.3...0.6.4) (2025-06-17)
 
 ### Bug Fixes
