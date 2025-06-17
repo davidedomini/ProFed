@@ -1,3 +1,9 @@
+## [0.6.2](https://github.com/davidedomini/ProFed/compare/0.6.1...0.6.2) (2025-06-17)
+
+### Bug Fixes
+
+* add return in method to distribute data from regions to devices ([3893417](https://github.com/davidedomini/ProFed/commit/38934176e4d3f51349218bfead8acc82e73fef36))
+
 ## [0.6.1](https://github.com/davidedomini/ProFed/compare/0.6.0...0.6.1) (2025-06-17)
 
 ### Bug Fixes
