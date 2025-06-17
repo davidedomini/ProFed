@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ProFed"
-version = "0.6.2"
+version = "0.6.3"
 description = "A benchmark for proximity-based non-IID Federated Learning"
 authors = ["Davide Domini <davide.domini@unibo.it>"]
 readme = "README.md"

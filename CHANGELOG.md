@@ -1,3 +1,13 @@
+## [0.6.3](https://github.com/davidedomini/ProFed/compare/0.6.2...0.6.3) (2025-06-17)
+
+### Dependency updates
+
+* **deps:** add pytest ([1e95ee4](https://github.com/davidedomini/ProFed/commit/1e95ee424d9a92c420c96938094c6de283cf7222))
+
+### Bug Fixes
+
+* using complete dataset and not only train and validation, otherwise we get index out of bounds ([7217fc0](https://github.com/davidedomini/ProFed/commit/7217fc0fcd8befbfcc4b4210c4ace9596053ef52))
+
 ## [0.6.2](https://github.com/davidedomini/ProFed/compare/0.6.1...0.6.2) (2025-06-17)
 
 ### Bug Fixes
