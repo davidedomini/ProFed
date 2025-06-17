@@ -28,6 +28,9 @@ torch = "^2.7.0"
 numpy = "^2.2.2"
 torchvision = "^0.22.0"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
