@@ -1,3 +1,9 @@
+## [0.6.1](https://github.com/davidedomini/ProFed/compare/0.6.0...0.6.1) (2025-06-17)
+
+### Bug Fixes
+
+* fix EMNIST test dataset name ([e589fd1](https://github.com/davidedomini/ProFed/commit/e589fd1782031ce657d083bb028b3459efae19a7))
+
 ## [0.6.0](https://github.com/davidedomini/ProFed/compare/0.5.0...0.6.0) (2025-06-09)
 
 ### Features
