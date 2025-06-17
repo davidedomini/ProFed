@@ -59,7 +59,7 @@ def download_dataset(dataset_name: str, transform: transforms.Compose = None, do
         test_dataset = datasets.CIFAR100(root=download_path, train=False, download=True, transform=transform)
     elif dataset_name == 'EMNIST':
         train_dataset = datasets.EMNIST(root=download_path, split='letters', train=True, download=True, transform=transform)
-        test_dataset = datasets.MNEMNISTIST(root=download_path, split='letters', train=False, download=True, transform=transform)
+        test_dataset = datasets.EMNIST(root=download_path, split='letters', train=False, download=True, transform=transform)
     elif dataset_name == 'FashionMNIST':
         train_dataset = datasets.FashionMNIST(root=download_path, train=True, download=True, transform=transform)
         test_dataset = datasets.FashionMNIST(root=download_path, train=False, download=True, transform=transform)
