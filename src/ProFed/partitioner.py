@@ -33,7 +33,7 @@ class Environment:
 
 
     def from_subregion_to_devices(self, region_id: int, number_of_devices: int):
-        self.regions[region_id].distribute_to_devices(number_of_devices)
+        return self.regions[region_id].distribute_to_devices(number_of_devices)
 
 
 def download_dataset(dataset_name: str, transform: transforms.Compose = None, download_path: str = 'dataset') -> tuple[Dataset,Dataset]:
