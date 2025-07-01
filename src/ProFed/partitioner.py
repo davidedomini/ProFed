@@ -2,6 +2,9 @@ import math
 import torch
 import random
 import numpy as np
+from datasets import load_dataset
+from collections import defaultdict
+from UTKFaceDataset import UTKFaceHFDataset
 from torchvision import datasets, transforms
 from torch.utils.data import Subset, Dataset, random_split
 
@@ -66,6 +69,10 @@ def download_dataset(dataset_name: str, transform: transforms.Compose = None, do
     elif dataset_name == 'FashionMNIST':
         train_dataset = datasets.FashionMNIST(root=download_path, train=True, download=True, transform=transform)
         test_dataset = datasets.FashionMNIST(root=download_path, train=False, download=True, transform=transform)
+    elif dataset_name == 'UTKFace':
+        ds = load_dataset("py97/UTKFace-Cropped", split="train")
+        dataset = UTKFaceHFDataset(ds, transform=transform)
+        train_dataset, test_dataset = split_train_validation(dataset, 0.85)
     else:
         raise Exception(f'Dataset {dataset_name} not supported! Please check :)')
     return train_dataset, test_dataset
@@ -85,8 +92,8 @@ def split_train_validation(dataset: Dataset, train_validation_ratio: float) -> t
     return training_data, validation_data
 
 
-def partition_to_subregions(training_dataset, validation_dataset, partitioning_method: str, number_of_regions: int, seed: int) -> Environment:
-    """
+def partition_to_subregions(training_dataset, validation_dataset, dataset_name, partitioning_method: str, number_of_regions: int, seed: int) -> Environment:
+    """ TODO fix doc
     Splits a torch Subset following a given method.
     Implemented methods for label skewness are: IID, Hard, Dirichlet
     :param partitioning_method: a string containing the name of the partitioning method.
@@ -96,12 +103,20 @@ def partition_to_subregions(training_dataset, validation_dataset, partitioning_m
         (IDs references the original dataset).
     """
     if partitioning_method == 'Dirichlet':
-        training_partitions = __partition_dirichlet(training_dataset, number_of_regions)
-        validation_partitions = __partition_dirichlet(validation_dataset, number_of_regions)
+        if dataset_name == 'UTKFace':
+            raise Exception('Dirichlet partitioning is not implemented for UTKFace')
+        training_partitions = __partition_dirichlet(training_dataset, number_of_regions, seed)
+        validation_partitions = __partition_dirichlet(validation_dataset, number_of_regions, seed)
     elif partitioning_method == 'Hard':
-        training_partitions = __partition_hard(training_dataset, number_of_regions)
-        validation_partitions = __partition_hard(validation_dataset, number_of_regions)
+        if dataset_name == 'UTKFace':
+            training_partitions = __partition_regression(training_dataset, number_of_regions)
+            validation_partitions = __partition_regression(validation_dataset, number_of_regions)
+        else:
+            training_partitions = __partition_hard(training_dataset, number_of_regions)
+            validation_partitions = __partition_hard(validation_dataset, number_of_regions)
     elif partitioning_method == 'IID':
+        if dataset_name == 'UTKFace':
+            raise Exception('IID partitioning is not implemented for UTKFace')
         training_partitions = __partition_iid(training_dataset, number_of_regions)
         validation_partitions = __partition_iid(validation_dataset, number_of_regions)
     else:
@@ -187,3 +202,26 @@ def __partition_dirichlet(data, areas, seed):
         np.random.shuffle(idx_batch[j])
         partitions[j] = idx_batch[j]
     return partitions
+
+def find_bounds(data) -> tuple[float, float]:
+  ys = []
+  for _, y in data:
+      ys.append(y.item())
+
+  lower = min(ys)
+  upper = max(ys)
+  return lower, upper
+
+def __partition_regression(data, areas) -> dict[int, list[int]]:
+  lower_bound, upper_bound = find_bounds(data)
+  bins = np.linspace(lower_bound, upper_bound, areas + 1)
+  ys = []
+  for idx in range(len(data)):
+      _, y = data[idx]
+      ys.append(y.item())
+  ys = np.array(ys)
+  bin_indices = np.digitize(ys, bins)
+  mapping = defaultdict(list)
+  for idx, b in enumerate(bin_indices):
+      mapping[int(b)].append(idx)
+  return mapping
