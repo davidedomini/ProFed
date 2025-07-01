@@ -1,3 +1,9 @@
+## [0.7.2](https://github.com/davidedomini/ProFed/compare/0.7.1...0.7.2) (2025-07-01)
+
+### Bug Fixes
+
+* fix regression split to consider indices of the subset ([80b0387](https://github.com/davidedomini/ProFed/commit/80b03876b280180e605bb2620830b056db97b7f2))
+
 ## [0.7.1](https://github.com/davidedomini/ProFed/compare/0.7.0...0.7.1) (2025-07-01)
 
 ### Bug Fixes
