@@ -213,15 +213,20 @@ def find_bounds(data) -> tuple[float, float]:
   return lower, upper
 
 def __partition_regression(data, areas) -> dict[int, list[int]]:
-  lower_bound, upper_bound = find_bounds(data)
-  bins = np.linspace(lower_bound, upper_bound, areas + 1)
-  ys = []
-  for idx in range(len(data)):
-      _, y = data[idx]
-      ys.append(y.item())
-  ys = np.array(ys)
-  bin_indices = np.digitize(ys, bins)
-  mapping = defaultdict(list)
-  for idx, b in enumerate(bin_indices):
-      mapping[int(b)].append(idx)
-  return mapping
+    lower_bound, upper_bound = find_bounds(data)
+    bins = np.linspace(lower_bound, upper_bound, areas+1)
+    print(bins)
+    ys = []
+    indices = []
+    for idx in range(len(data)):
+        _, y = data[idx]
+        ys.append(y.item())
+        indices.append(data.indices[idx])
+    ys = np.array(ys)
+    bin_indices = np.digitize(ys, bins, right=True)
+    bin_indices = np.clip(bin_indices, 1, len(bins) - 1)
+    mapping = defaultdict(list)
+    for idx, b in enumerate(bin_indices):
+        mapping[int(b)].append(indices[idx])
+
+    return mapping
