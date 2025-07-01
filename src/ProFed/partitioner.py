@@ -4,7 +4,7 @@ import random
 import numpy as np
 from datasets import load_dataset
 from collections import defaultdict
-from UTKFaceDataset import UTKFaceHFDataset
+from ProFed.UTKFaceDataset import UTKFaceHFDataset
 from torchvision import datasets, transforms
 from torch.utils.data import Subset, Dataset, random_split
 
