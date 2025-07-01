@@ -1,3 +1,14 @@
+## [0.7.0](https://github.com/davidedomini/ProFed/compare/0.6.5...0.7.0) (2025-07-01)
+
+### Features
+
+* implement hard partitioning for UTKFaceDataset ([8c48dca](https://github.com/davidedomini/ProFed/commit/8c48dcaa309afa48d12512db20d430b28cb700c8))
+* implement UTKFaceDataset ([c47c232](https://github.com/davidedomini/ProFed/commit/c47c232d5a8ef2200a307bdaa3b54aacb2c6a97a))
+
+### Dependency updates
+
+* **deps:** add datasets, fsspec, tensorflow-datasets dependecies ([130014a](https://github.com/davidedomini/ProFed/commit/130014add9a60217f93d40eca8b5d5ae15b53084))
+
 ## [0.6.5](https://github.com/davidedomini/ProFed/compare/0.6.4...0.6.5) (2025-06-17)
 
 ### Bug Fixes
