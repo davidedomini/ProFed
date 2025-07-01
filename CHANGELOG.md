@@ -1,3 +1,9 @@
+## [0.7.1](https://github.com/davidedomini/ProFed/compare/0.7.0...0.7.1) (2025-07-01)
+
+### Bug Fixes
+
+* fix UTKFaceDataset import ([35a914e](https://github.com/davidedomini/ProFed/commit/35a914e18ff8186c732cda335489bad9a26cab62))
+
 ## [0.7.0](https://github.com/davidedomini/ProFed/compare/0.6.5...0.7.0) (2025-07-01)
 
 ### Features
