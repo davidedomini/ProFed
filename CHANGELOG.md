@@ -1,3 +1,13 @@
+## [0.7.3](https://github.com/davidedomini/ProFed/compare/0.7.2...0.7.3) (2025-07-23)
+
+### Bug Fixes
+
+* fix partitioning when using datasets in which targets are lists but not tensors ([093127d](https://github.com/davidedomini/ProFed/commit/093127da03408959462883b5fa6a410002dc0278))
+
+### General maintenance
+
+* update readme ([6b40db7](https://github.com/davidedomini/ProFed/commit/6b40db7dc98766399f813c0741c97267d0c2a3c7))
+
 ## [0.7.2](https://github.com/davidedomini/ProFed/compare/0.7.1...0.7.2) (2025-07-01)
 
 ### Bug Fixes
