@@ -151,6 +151,8 @@ def __partition_iid(data, areas) -> dict[int, list[int]]:
 def __partition_by_distribution(distribution: np.ndarray, data: Subset, areas: int) -> dict[int, list[int]]:
     indices = data.indices
     targets = data.dataset.targets
+    if not isinstance(targets, torch.Tensor):
+        targets = torch.tensor(targets)
     class_counts = torch.bincount(targets[indices])
     class_to_indices = {}
     for index in indices:
@@ -215,7 +217,6 @@ def find_bounds(data) -> tuple[float, float]:
 def __partition_regression(data, areas) -> dict[int, list[int]]:
     lower_bound, upper_bound = find_bounds(data)
     bins = np.linspace(lower_bound, upper_bound, areas+1)
-    print(bins)
     ys = []
     indices = []
     for idx in range(len(data)):
